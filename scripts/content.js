@@ -15,7 +15,12 @@ let divInner = document.createElement("div");
 divInner.classList.add("ivm-view-attr__img-wrapper", "display-flex");
 
 let img = document.createElement("img");
-img.setAttribute("src", "images/save.png")
+img.setAttribute("src", chrome.runtime.getURL("images/save.png"));
+img.setAttribute("id", "imgSaved");
+
+divInner.appendChild(img);
+divOuter.appendChild(divInner);
+aViewPosts.appendChild(divOuter);
 
 let spanViewPosts = document.createElement("span");
 spanViewPosts.classList.add("t-12", "break-words", "block", "t-black--light", "t-normalglobal-nav_primary-link-text");
@@ -27,3 +32,18 @@ ulHeader.appendChild(liViewPosts);
 
 
 
+let speechRecognition = new webkitSpeechRecognition()
+speechRecognition.continuous = true;
+speechRecognition.lang = "en-us";
+speechRecognition.start();
+
+
+speechRecognition.onresult = function(event) {
+    let transcript = event.results[event.resultIndex][0].transcript;
+    console.log(event);
+
+    if (transcript.trim().toLowerCase().includes("saved")){
+        aViewPosts.click();
+    }
+   
+};

@@ -17,9 +17,13 @@
         "matches": [
 
             "https://www.linkedin.com/*"
-
-        
         ]
       }
+    ],
+    "web_accessible_resources": [{
+        "resources": ["images/save.png"],
+        "matches": ["https://www.linkedin.com/*"]
+    }
+
     ]
   }
